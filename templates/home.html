@@ -12,22 +12,32 @@
 		<h1>Reddit Reader</h1>
 		<h3>A service to aggregate all your favourite subreddits</h3>
 	</header>
-	<main>        
-        <form method="get" action="/read">
-            <ul>
-                {% for reddit in subreddits %}
-                <li>
-                    <input type="checkbox" id={{reddit}} name={{reddit}} value="on">
-                    <label for={{reddit}}>r/{{reddit}}</label><br>
-                </li>
-                {% endfor %}
-            </ul>
-            <button type="submit">Aggregate</button>            
-        </form>
+	<main>
+        <article>
+            <h4>Add a subreddit:</h4>
+            <h5>write the name without /r/</h5>
+            <form method="post" action="/add" id="add_form">
+                <input type="text" name="subreddit" id="subreddit" placeholder="Write a subreddit name">
+                <button type="submit" form="add_form" value="Add">Add</button>
+            </form>
+        </article>
+		<article>
+            <h4>Select the subreddits you're interested on:</h4>
+			<form method="get" action="/read">
+				<ul>
+					{% for reddit in subreddits %}
+					<li>
+						<input type="checkbox" id={{reddit}} name={{reddit}} value="on">
+                        <label for={{reddit}}>r/{{reddit}}</label><br>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <button type="submit">Aggregate</button>            
+            </form>
+        </article>
         
     </main>
   
 </body>
 
 </html>
-

@@ -62,9 +62,11 @@ def get_subreddit(readingList):
 
 app = Flask("DayEleven")
 
+
 @app.route("/")
 def home():
     return render_template("home.html", subreddits=subreddits)
+
 
 @app.route("/read")
 def read():
@@ -75,10 +77,23 @@ def read():
     
     results = get_subreddit(readingList)
 
-    for result in results:
-        for reddit in result:
-            print(reddit['title'])
-
     return render_template("read.html", readingList=readingList, results=results)
+
+
+@app.route("/add", methods=["POST"])
+def add():
+    added = request.form['subreddit']
+    if "/r/" in added :
+        return render_template("add.html", result="has_r")
+    else:
+        if added in subreddits:
+            return render_template("add.html", result="already")
+        else:
+            aa = get_subreddit([added])
+            if aa == [[]]:
+                return render_template("add.html", result="no_exist")
+            else:
+                subreddits.append(added)
+                return render_template("home.html", subreddits=subreddits) 
 
 app.run(host="0.0.0.0")

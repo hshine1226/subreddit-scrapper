@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://andybrewer.github.io/mvp/mvp.css" rel="stylesheet"></link>
+</head>
+
+<body>
+    <header>
+		<a href="/"><h1>Reddit Reader</h1></a>
+		<h3>Add Page</h3>
+	</header>
+    <main>
+        {% if result == "already" %}
+        <h4>That subreddit is already on the list.</h4>
+        {% elif result == "no_exist" %}
+        <h4>That subreddit does not exist.</h4>
+        {% elif result == "has_r" %}
+        <h4>Write the name without /r/</h4>
+        {% endif %}
+        <a href="/">←Go back</a>
+    </main>
+</body>
+
+</html>
